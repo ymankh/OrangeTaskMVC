@@ -6,12 +6,11 @@ using System.Web.Mvc;
 
 namespace OrangeTaskMVC.Controllers
 {
-    public class AuthenticationController : Controller
+    public class Task3Controller : Controller
     {
-        // GET: Authentication
+        // GET: Task3
         public ActionResult Index()
         {
-            
             return View();
         }
     }
