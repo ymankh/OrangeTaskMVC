@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using OrangeTaskMVC.Models;
 
 namespace OrangeTaskMVC.Controllers
@@ -48,10 +49,12 @@ namespace OrangeTaskMVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,ProductName,CategoryID,Price,Quantity,img_url")] Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
+                var fileName = SaveImage(ImageFile);
+                product.img_url = "/img/" + fileName;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -59,6 +62,15 @@ namespace OrangeTaskMVC.Controllers
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             return View(product);
+        }
+
+        string SaveImage(HttpPostedFileBase ImageFile)
+        {
+            string path = Server.MapPath("~/img/");
+            string fileName = Path.GetFileName(RandomString(20) + ImageFile.FileName);
+            string fullPath = Path.Combine(path, fileName);
+            ImageFile.SaveAs(fullPath);
+            return fileName;
         }
 
         // GET: Products/Edit/5
@@ -82,17 +94,29 @@ namespace OrangeTaskMVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,CategoryID,Price,Quantity,img_url")] Product product)
+        public ActionResult Edit(Product product, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                var fileName = SaveImage(ImageFile);
+                product.img_url = "/img/" + fileName;
+                db.Products.AddOrUpdate(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             return View(product);
         }
+
+        private static Random random = new Random();
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
 
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)

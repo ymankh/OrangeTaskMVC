@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrangeTaskMVC", "OrangeTaskMVC.csproj", "{48166D2E-ACA2-4C44-ADAF-0510F593B9B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication28", "..\WebApplication28\WebApplication28.csproj", "{75F62619-6EAC-4F33-8213-D151C7A1879F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{48166D2E-ACA2-4C44-ADAF-0510F593B9B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48166D2E-ACA2-4C44-ADAF-0510F593B9B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48166D2E-ACA2-4C44-ADAF-0510F593B9B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75F62619-6EAC-4F33-8213-D151C7A1879F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75F62619-6EAC-4F33-8213-D151C7A1879F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75F62619-6EAC-4F33-8213-D151C7A1879F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75F62619-6EAC-4F33-8213-D151C7A1879F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
